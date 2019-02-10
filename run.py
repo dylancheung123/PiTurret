@@ -28,18 +28,28 @@ kit = MotorKit()
 # Code for reading from the joystick
 for event in joystick.read_loop():
 	print()
-	print(categorize(event))
+	print(categorize(event)
+	
 	if event.type == BUTTON:
 		keyevent = categorize(event)
 		if keyevent.keystate == KeyEvent.key_down:
 			if keyevent.keycode[0] == 'BTN_JOYSTICK':
 				if keyevent.keycode[1] == 'BTN_TRIGGER':
 					print("Fire!!!")
+
 	elif event.type == AXIS:
-		print(event.code)
 		if event.code == ABS_X:
 			print("ABS_X")
-			print(event)
+		elif event.code == ABS_Y:
+			print("ABS_Y")
+		elif event.code == ABS_RZ:
+			print("ABS_RZ"):
+		elif eventcode == ABS_THROTTLE:
+			print("ABS_THROTTLE")
+		elif event.code == ABS_HAT0X:
+			print("ABS_HAT0X")
+		elif eventcode == ABS_HAT0Y:
+			print("ABS_HAT0Y")
 
 	else: 
 		print("OTHER.....")	
