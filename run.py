@@ -24,11 +24,13 @@ ABS_HAT0X = 16
 ABS_HAT0Y = 17
 
 ''' GPIO Pins '''
-TRIGGER_PIN = 11
+TRIGGER_PIN = 17
 
 ''' Initializing '''
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(TRIGGER_PIN, GPIO.OUT)
-GPIO.OUTPUT(TRIGGER_PIN, GPIO.HIGH)
+GPIO.output(TRIGGER_PIN, GPIO.HIGH)
+
 joystick = InputDevice("/dev/input/event1")
 print(joystick.capabilities())
 
@@ -45,7 +47,7 @@ for event in joystick.read_loop():
 				if keyevent.keycode[1] == 'BTN_TRIGGER':
 					print("Fire!!!")
 					GPIO.output(TRIGGER_PIN, GPIO.LOW)
-					time.sleep(1)
+					time.sleep(0.11)
 					GPIO.output(TRIGGER_PIN, GPIO.HIGH)
 	elif event.type == AXIS:
 		if event.code == ABS_X:
