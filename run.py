@@ -2,6 +2,9 @@
 Interface for Raider Advanced FX to control the PiTurret
 @author: Dylan L. Cheung
 '''
+import RPi.GPIO as GPIO
+import time
+
 from adafruit_motorkit import MotorKit
 from adafruit_motor import stepper
 from evdev import InputDevice, categorize, ecodes, KeyEvent
@@ -20,11 +23,16 @@ ABS_THROTTLE = 6
 ABS_HAT0X = 16
 ABS_HAT0Y = 17
 
+''' GPIO Pins '''
+TRIGGER_PIN = 11
+
 ''' Initializing '''
+GPIO.setup(TRIGGER_PIN, GPIO.OUT)
+
 joystick = InputDevice("/dev/input/event1")
 print(joystick.capabilities())
-kit = MotorKit()
 
+kit = MotorKit()
 MOTOR_X = kit.stepper1
 MOTOR_Y = kit.stepper2
 
@@ -36,6 +44,9 @@ for event in joystick.read_loop():
 			if keyevent.keycode[0] == 'BTN_JOYSTICK':
 				if keyevent.keycode[1] == 'BTN_TRIGGER':
 					print("Fire!!!")
+					GPIO.output(TRIGGER_PIN, GPIO.HIGH)
+					time.sleep(1)
+					GPIO.output(TRIGGER_PIN, GPIO.LOW)
 	elif event.type == AXIS:
 		if event.code == ABS_X:
 			print("ABS_X with value: ", event.value)
