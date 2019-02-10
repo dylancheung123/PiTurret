@@ -6,8 +6,19 @@ from adafruit_motorkit import MotorKit
 from adafruit_motor import stepper
 from evdev import InputDevice, categorize, ecodes, KeyEvent
 
-''' Globals '''
+''' Globals Types'''
 BUTTON = 1
+AXIS = 3
+
+''' Global Codes '''
+ABS_X = 0
+ABS_Y = 1
+
+ABS_RZ = 5
+ABS_THROTTLE = 6
+
+ABS_HAT0X = 16
+ABS_HAT0Y = 17
 
 ''' Initializing '''
 joystick = InputDevice("/dev/input/event1")
@@ -24,9 +35,12 @@ for event in joystick.read_loop():
 			if keyevent.keycode[0] == 'BTN_JOYSTICK':
 				if keyevent.keycode[1] == 'BTN_TRIGGER':
 					print("Fire!!!")
-	elif event.type == 3:
-		print("ABS")
+	elif event.type == AXIS:
 		print(event.code)
+		if event.code == ABS_X:
+			print("ABS_X")
+			print(event)
+
 	else: 
 		print("OTHER.....")	
 
