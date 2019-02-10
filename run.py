@@ -29,7 +29,7 @@ kit = MotorKit()
 for event in joystick.read_loop():
 	print()
 	print(categorize(event)
-	
+
 	if event.type == BUTTON:
 		keyevent = categorize(event)
 		if keyevent.keystate == KeyEvent.key_down:
@@ -39,7 +39,7 @@ for event in joystick.read_loop():
 
 	elif event.type == AXIS:
 		if event.code == ABS_X:
-			print("ABS_X")
+			print("ABS_X with value: ", event.value)
 		elif event.code == ABS_Y:
 			print("ABS_Y")
 		elif event.code == ABS_RZ:
