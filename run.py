@@ -25,34 +25,42 @@ joystick = InputDevice("/dev/input/event1")
 print(joystick.capabilities())
 kit = MotorKit()
 
+MOTOR_X = kit.stepper1
+MOTOR_Y = kit.stepper2
+
 # Code for reading from the joystick
 for event in joystick.read_loop():
-	print()
-	print(categorize(event)
-
 	if event.type == BUTTON:
 		keyevent = categorize(event)
 		if keyevent.keystate == KeyEvent.key_down:
 			if keyevent.keycode[0] == 'BTN_JOYSTICK':
 				if keyevent.keycode[1] == 'BTN_TRIGGER':
 					print("Fire!!!")
-
 	elif event.type == AXIS:
 		if event.code == ABS_X:
 			print("ABS_X with value: ", event.value)
 		elif event.code == ABS_Y:
-			print("ABS_Y")
+			print("ABS_Y with value: ", event.value)
+			if event.value > 127:
+				print("Tilting up")
+				MOTOR_Y.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)			
+			elif event.value < 127:
+				print("Tilting down")
+				MOTOR_Y.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
 		elif event.code == ABS_RZ:
-			print("ABS_RZ"):
-		elif eventcode == ABS_THROTTLE:
-			print("ABS_THROTTLE")
+			print("ABS_RZ with value: ", event.value)
+			if event.value > 127:
+				print("Rotating right")
+				MOTOR_X.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)
+			elif event.value < 127:
+				print("Rotating left")
+				MOTOR_X.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
+		elif event.code == ABS_THROTTLE:
+			print("ABS_THROTTLE with value: ", event.value)
 		elif event.code == ABS_HAT0X:
-			print("ABS_HAT0X")
-		elif eventcode == ABS_HAT0Y:
-			print("ABS_HAT0Y")
-
-	else: 
-		print("OTHER.....")	
+			print("ABS_HAT0X with value: ", event.value)
+		elif event.code == ABS_HAT0Y:
+			print("ABS_HAT0Y with value: ", event.value)
 
 # Code for running the motor
 '''
