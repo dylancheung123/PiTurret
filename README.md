@@ -20,7 +20,7 @@ _Parts List:_
  - Other missing miscellaneous parts and links to be added ...
 ----------
 
-Development Environment
+Setting Up
 -------------
 1. (Optional) Set up OLED screen --> [walkthrough](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples)
 2. Set up Stepper Motor HAT --> [walkthrough](https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi)
