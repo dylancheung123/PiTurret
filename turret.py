@@ -77,10 +77,10 @@ class Actions:
     MOTOR_Y.release()
 
   def tiltUp(self):
-    MOTOR_Y.onestep(direction=stepper.FORWARD, style=stepper.SINGLE)			
+    MOTOR_Y.onestep(direction=stepper.FORWARD, style=stepper.DOUBLE)			
 
   def tiltDown(self):
-    MOTOR_Y.onestep(direction=stepper.BACKWARD, style=stepper.SINGLE)
+    MOTOR_Y.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
 
   def releaseRotate(self):
     MOTOR_X.release()
